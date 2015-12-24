@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Dot patterns</title>
+
+	<link rel="stylesheet" type="text/css" href="vendor/normalize-css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+	<h1>Dot pattern demonstration</h1>
+
+	<section id="container">
+		<canvas id="dots" width="400" height="400"></canvas>
+		<canvas id="dots-transform" width="400" height="400"></canvas>
+	</section><!-- #container -->
+
+	<section id="controls">
+		<form>
+			<label>
+				X: 
+				<input type="range" name="x-transform" min="-20" max="20" step="0.1" />
+				<br />
+			</label>
+
+			<label>
+				Y: <input type="range" name="y-transform" min="-20" max="20" step="0.1" />
+				<br />
+			</label>
+
+			<label>
+				Rotate: <input type="range" name="rotation" min="-45" max="45" step="0.1" />
+				<br />
+			</label>
+
+			<input type="reset" />
+		</form>
+	</section>
+
+	<script src="vendor/jquery/dist/jquery.min.js"></script>
+	<script src="scripts.js" async></script>
+</body>
+</html>
