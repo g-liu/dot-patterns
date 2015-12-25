@@ -44,9 +44,40 @@ var patternDrawer = (function() {
 		return id;
 	};
 
+	var getTriangularGrid = function(width, height) {
+		var canvas = document.createElement('canvas');
+		canvas.width = width;
+		canvas.height = height;
+		var ctx = canvas.getContext('2d');
+
+		// size of the side of a triangle
+		var TRIANGLE_SIZE = 10;
+
+		// automatically computed
+		var TRIANGLE_VERT_HEIGHT = Math.sqrt((TRIANGLE_SIZE * TRIANGLE_SIZE) - ((TRIANGLE_SIZE / 2) * (TRIANGLE_SIZE / 2)));
+
+		// draw triangle pattern
+		ctx.fillStyle = "#000";
+
+		for (var i = 0, rowCounter = 0; i < height; i += TRIANGLE_VERT_HEIGHT, rowCounter++) {
+			var horizontalOffset = rowCounter % 2 === 1 ? TRIANGLE_SIZE / 2 : 0;
+			for (var j = -TRIANGLE_SIZE; j < width; j += TRIANGLE_SIZE) {
+				ctx.beginPath();
+				ctx.moveTo(horizontalOffset + j, i + TRIANGLE_VERT_HEIGHT);
+				ctx.lineTo(horizontalOffset + j + TRIANGLE_SIZE / 2, i);
+				ctx.lineTo(horizontalOffset + j + TRIANGLE_SIZE, i + TRIANGLE_VERT_HEIGHT);
+				ctx.closePath();
+				ctx.fill();
+			}
+		}
+
+		return ctx.getImageData(0, 0, width, height);
+	};
+
 	var nameToPatternMap = {
 		'random': getRandom,
-		'grid-dots': getGrid
+		'grid-dots': getGrid,
+		'grid-triangles': getTriangularGrid
 	};
 
 	var getPatternByName = function(name, width, height) {
